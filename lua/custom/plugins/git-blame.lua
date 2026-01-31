@@ -9,4 +9,13 @@ return {
     date_format = '%d-%m-%Y %H:%M:%S',
     virtual_text_column = 1,
   },
+  keys = {
+    {
+      '<leader>gb',
+      function()
+        vim.cmd('vsplit | terminal git blame ' .. vim.fn.expand '%')
+      end,
+      desc = '[G]it [B]lame full file',
+    },
+  },
 }
