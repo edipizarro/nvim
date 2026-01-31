@@ -14,6 +14,25 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+-- Add missing LSP keymaps on LspAttach
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('custom-lsp-keymaps', { clear = true }),
+  callback = function(event)
+    local buf = event.buf
+    local telescope = require 'telescope.builtin'
+
+    -- Missing gr* keymaps
+    vim.keymap.set('n', 'grd', telescope.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'grD', vim.lsp.buf.declaration, { buffer = buf, desc = '[G]oto [D]eclaration' })
+    vim.keymap.set('n', 'gO', telescope.lsp_document_symbols, { buffer = buf, desc = 'Document Symbols' })
+    vim.keymap.set('n', 'gW', telescope.lsp_dynamic_workspace_symbols, { buffer = buf, desc = 'Workspace Symbols' })
+
+    -- Diagnostic keymaps
+    vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { buffer = buf, desc = '[L]int [E]rror (diagnostic)' })
+    vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { buffer = buf, desc = '[L]int [Q]uickfix list' })
+  end,
+})
+
 -- Extend which-key with custom groups
 return {
   'folke/which-key.nvim',
@@ -21,6 +40,7 @@ return {
     opts.spec = opts.spec or {}
     vim.list_extend(opts.spec, {
       { '<leader>g', group = '[G]it' },
+      { '<leader>l', group = '[L]int/LSP' },
     })
   end,
 }
