@@ -13,7 +13,8 @@ return {
     {
       '<leader>gb',
       function()
-        vim.cmd('vsplit | terminal git blame ' .. vim.fn.expand '%')
+        local file = vim.fn.shellescape(vim.fn.expand '%')
+        vim.cmd('vsplit | terminal git blame ' .. file)
       end,
       desc = '[G]it [B]lame full file',
     },
