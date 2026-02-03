@@ -10,12 +10,10 @@ return {
     { 'zK', function() require('ufo').peekFoldedLinesUnderCursor() end, desc = 'Peek folded lines' },
   },
   opts = {
-    provider_selector = function()
-      return { 'treesitter', 'indent' }
-    end,
+    provider_selector = function() return { 'treesitter', 'indent' } end,
   },
   init = function()
-    vim.opt.foldcolumn = '1'
+    vim.opt.foldcolumn = '0'
     vim.opt.foldlevel = 99
     vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
