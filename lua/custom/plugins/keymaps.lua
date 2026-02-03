@@ -16,6 +16,10 @@ vim.api.nvim_create_autocmd('User', {
     -- This avoids "dead key" issues on Spanish keyboard layouts
     vim.keymap.set('n', 'M', "'", { desc = 'Jump to Mark (Line)' })
     vim.keymap.set('n', 'gM', '`', { desc = 'Jump to Mark (Exact)' })
+
+    -- Make Alt/Option + f move forward one word (like in terminal)
+    vim.keymap.set('n', '<M-f>', 'w', { desc = 'Forward word' })
+    vim.keymap.set('i', '<M-f>', '<C-o>w', { desc = 'Forward word' })
   end,
 })
 
