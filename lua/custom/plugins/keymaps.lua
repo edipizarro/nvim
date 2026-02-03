@@ -11,6 +11,11 @@ vim.api.nvim_create_autocmd('User', {
       vim.fn.setreg('+', path)
       print('Copied: ' .. path)
     end, { desc = '[C]opy file [P]ath' })
+
+    -- Jump to marks using 'M' instead of the single quote key
+    -- This avoids "dead key" issues on Spanish keyboard layouts
+    vim.keymap.set('n', 'M', "'", { desc = 'Jump to Mark (Line)' })
+    vim.keymap.set('n', 'gM', '`', { desc = 'Jump to Mark (Exact)' })
   end,
 })
 
@@ -41,6 +46,7 @@ return {
     vim.list_extend(opts.spec, {
       { '<leader>g', group = '[G]it' },
       { '<leader>l', group = '[L]int/LSP' },
+      { 'M', group = 'Jump to Mark' },
     })
   end,
 }
